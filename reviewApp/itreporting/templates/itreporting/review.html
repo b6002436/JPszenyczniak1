@@ -1,0 +1,10 @@
+{% extends "itreporting/base.html" %}
+{% block content %}
+	{% for review in reviews %}
+	<h1> {{ review.author }} </h1>
+	<p> By {{ review.productrating }} on {{ review.date }}</p>
+	<p> {{ review.reviewtext }} </p>
+
+{% endfor %}
+{% endblock content %}
+
