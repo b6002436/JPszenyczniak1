@@ -11,13 +11,20 @@
 
       <a class="mr-2" href="#">{{ object.author }}</a>
 
-      <small class="text-muted">{{ object.dateposted}}</small>
+      <small class="text-muted">{{ object.date}}</small>
 
     </div>
 
     <h2 class="article-title">{{object.productrating}}</h2>
 
     <p class="article-content">{{ object.reviewtext }}</p>
+
+{% if object.author == user %}
+	<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' object.id %}"> Update </a>
+
+	<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' object.id %}"> Delete </a>
+
+{% endif %}
 
   </div>
 

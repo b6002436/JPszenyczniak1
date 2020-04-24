@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Review
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -49,6 +49,16 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 		form.instance.author = self.request.user
 		return super().form_valid(form)
 	
+	def test_func(self):
+		review = self.get_object()
+		if self.request.user == review.author:
+			return True
+		return False
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Review
+	success_url = '/review'
+
 	def test_func(self):
 		review = self.get_object()
 		if self.request.user == review.author:
