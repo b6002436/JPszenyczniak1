@@ -1,19 +1,5 @@
 from django.shortcuts import render
-
-reviews = [
-	{ 
-		'author': 'Jade',
-		'productrating': '5',
-		'reviewtext' : 'Good',
-		'date': '12/04/2020'
-	},
-	{ 
-		'author': 'Dan',
-		'productrating': '5',
-		'reviewtext' : 'Good',
-		'date': '12/04/2020'
-	}
-]
+from .models import Review
 
 def home(request):
 	return render(request, 'itreporting/home.html', {'title': 'Home'})
@@ -30,10 +16,10 @@ def product(request):
 	}
 
 def review(request):
-	context = {
-		'reviews': reviews
+	reviews = {
+		'reviews' : Review.objects.all()
 		}
-	return render(request, 'itreporting/review.html',context)
+	return render(request, 'itreporting/review.html',reviews)
 
 
 

@@ -1,9 +1,27 @@
 {% extends "itreporting/base.html" %}
 {% block content %}
 	{% for review in reviews %}
-	<h1> {{ review.author }} </h1>
-	<p> By {{ review.productrating }} on {{ review.date }}</p>
-	<p> {{ review.reviewtext }} </p>
+	<article class="media content-section">
+
+	<img class="rounded-circle article-img" src="{{ review.author.profile.image.url }}"/>
+
+  <div class="media-body">
+
+    <div class="article-metadata">
+
+      <a class="mr-2" href="#">{{ review.author }}</a>
+
+      <small class="text-muted">{{ review.dateposted}}</small>
+
+    </div>
+
+    <h2><a class="article-title" href="#">{{ review.productrating }} </a></h2>
+
+    <p class="article-content">{{ review.reviewtext }}</p>
+
+  </div>
+
+</article>
 
 {% endfor %}
 {% endblock content %}

@@ -11,3 +11,12 @@ class Product(models.Model):
 	#review=models.ForeignKey(Review, on_delete=models.CASCADE)
 
 # Create your models here.
+
+class Review(models.Model):
+	productrating=models.CharField(max_length=5)
+	reviewtext=models.TextField()
+	date=models.DateTimeField(default=timezone.now)
+	author=models.ForeignKey(User,on_delete=models.CASCADE)
+
+def __str__(self):
+	return self.type
