@@ -1,6 +1,7 @@
 {% extends "itreporting/base.html" %}
 {% block content %}
-	{% for review in reviews %}
+{% for review in reviews %}
+
 	<article class="media content-section">
 
 	<img class="rounded-circle article-img" src="{{ review.author.profile.image.url }}"/>
@@ -11,11 +12,11 @@
 
       <a class="mr-2" href="#">{{ review.author }}</a>
 
-      <small class="text-muted">{{ review.dateposted}}</small>
+      <small class="text-muted">{{ review.date}}</small>
 
     </div>
 
-    <h2><a class="article-title" href="#">{{ review.productrating }} </a></h2>
+    <h2><a class="article-title" href="{% url 'review-detail' review.id %}">{{ review.productrating }} </a></h2>
 
     <p class="article-content">{{ review.reviewtext }}</p>
 
