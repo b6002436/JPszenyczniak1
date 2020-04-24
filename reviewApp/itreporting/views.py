@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Review
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 
 def home(request):
 	return render(request, 'itreporting/home.html', {'title': 'Home'})
@@ -30,6 +31,18 @@ class PostListView(ListView):
 	context_object_name = 'reviews'
 	ordering = ['-date']
 	paginate_by = 5
+
+class UserPostListView(ListView):
+	model = Review
+	template_name = 'itreporting/user_reviews.html'
+	context_object_name = 'reviews'
+	paginate_by = 5
+
+	def get_queryset(self):
+		user=get_object_or_404(User,
+		username=self.kwargs.get('username'))
+
+		return Review.objects.filter(author=user).order_by('-date')
 
 class PostDetailView(DetailView):
 	model = Review

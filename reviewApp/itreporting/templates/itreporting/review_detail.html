@@ -9,7 +9,7 @@
 
     <div class="article-metadata">
 
-      <a class="mr-2" href="#">{{ object.author }}</a>
+      <p class="mr-2"> Posted by <a class="mr-2" href="{% url 'user-reviews' object.author.username %}"> {{ object.author }}</a> on {{ object.date }} </p>
 
       <small class="text-muted">{{ object.date}}</small>
 
