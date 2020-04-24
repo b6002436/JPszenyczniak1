@@ -29,6 +29,7 @@ class PostListView(ListView):
 	template_name = 'itreporting/review.html'
 	context_object_name = 'reviews'
 	ordering = ['-date']
+	paginate_by = 5
 
 class PostDetailView(DetailView):
 	model = Review
