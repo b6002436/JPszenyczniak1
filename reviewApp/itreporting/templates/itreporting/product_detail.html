@@ -1,0 +1,25 @@
+{% extends "itreporting/base.html" %}
+{% block content %} 
+
+<h1>  Sheffield Electronics - Products </h1>
+
+<article class="media content-section">
+
+  <div class="media-body">
+	<p><img class="rounded-circle account-img" src={{product.image.url}}"></p>
+
+    <div class="article-metadata">
+
+      <h1><a class="mr-2" href="#">{{ object.productname }} </a></h1>
+	<p> Release Date: {{object.dateofrelease}}</p></br>
+ 	<p> Cost(£): {{object.averagecost}}</p></br>
+	<p> Brand: {{object.brand}}</p></br>
+    	<p> Description: {{ object.description}}</p></br>
+
+    </div>
+	
+
+  </div>
+
+</article>
+{% endblock content %}

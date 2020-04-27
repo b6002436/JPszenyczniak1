@@ -3,4 +3,28 @@
 
 <h1>  Sheffield Electronics - Products </h1>
 
+{% for product in products %}
+
+<article class="media content-section">
+
+  <div class="media-body">
+	<p><img class="rounded-circle account-img" src={{product.image.url}}"></p>
+
+    <div class="article-metadata">
+
+ 	<h1> Product: <a class="mr-2" href="{% url 'product-detail' product.id %}">{{ product.productname }} </a></h1>
+     
+	<p> Release Date: {{product.dateofrelease}}</p></br>
+ 	<p> Cost(£): {{product.averagecost}}</p></br>
+	<p> Brand: {{product.brand}}</p></br>
+    	<p> Description: {{ product.description}}</p></br>
+
+    </div>
+	
+
+  </div>
+
+</article>
+{% endfor %}
+
 {% endblock content %}

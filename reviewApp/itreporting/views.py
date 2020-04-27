@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Review
+from .models import Review, Product
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -15,15 +15,49 @@ def contact(request):
 	return render(request, 'itreporting/contact.html', {'title': 'Contact Us'})
 
 def product(request):
-	products= {
-	'product' : Product.objects.all()
+	products = {
+	'products' : Product.objects.all()
 	}
+	return render(request, 'itreporting/product.html',products)
+
+class ProductListView(ListView):
+	model = Product
+	template_name = 'itreporting/product.html'
+	context_object_name = 'products'
+	ordering = ['-dateofrelease']
+	paginate_by = 5
+
+class ProductDetailView(DetailView):
+	model = Product
+
+class ProductCreateView(LoginRequiredMixin, CreateView):
+	model = Product
+	fields = ['productname','brand', 'averagecost', 'dateofrelease', 'description', 'image']
+
+	def form_valid(self, form):
+		return super().form_valid(form)
+
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	model = Product
+	fields = ['productname','brand', 'averagecost', 'dateofrelease', 'description','image']
+
+	def test_func(self):
+		product = self.get_object()
+
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = Product
+	success_url = '/product'
+
+	def test_func(self):
+		product = self.get_object()
+
 
 def review(request):
 	reviews = {
 		'reviews' : Review.objects.all()
 		}
 	return render(request, 'itreporting/review.html',reviews)
+
 
 class PostListView(ListView):
 	model = Review
@@ -41,7 +75,6 @@ class UserPostListView(ListView):
 	def get_queryset(self):
 		user=get_object_or_404(User,
 		username=self.kwargs.get('username'))
-
 		return Review.objects.filter(author=user).order_by('-date')
 
 class PostDetailView(DetailView):
@@ -50,19 +83,18 @@ class PostDetailView(DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Review
 	fields = ['productrating', 'date', 'reviewtext']
+	def form_valid(self, form):
+		form.instance.author = self.request.user
+		return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	model = Review
+	fields = ['productrating', 'date', 'reviewtext']
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
 		return super().form_valid(form)
-	
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-	model = Review
-	fields = ['productrating', 'date', 'reviewtext']
-	
-	def form_valid(self, form):
-		form.instance.author = self.request.user
-		return super().form_valid(form)
-	
+
 	def test_func(self):
 		review = self.get_object()
 		if self.request.user == review.author:
@@ -78,5 +110,4 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 		if self.request.user == review.author:
 			return True
 		return False
-
 # Create your views here.
