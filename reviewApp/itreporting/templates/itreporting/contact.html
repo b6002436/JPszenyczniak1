@@ -1,7 +1,13 @@
 {% extends "itreporting/base.html" %}
+{% load crispy_forms_tags %} 
 
-{% block content %} 
+{% block title %}Contact - {{ block.super }}{% endblock %}
 
-<h1> Contact Us </h1>
-
-{% endblock content %}
+{% block content %}
+<h1>Contact</h1>
+<form role="form" action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

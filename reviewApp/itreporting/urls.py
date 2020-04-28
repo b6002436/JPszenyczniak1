@@ -7,6 +7,7 @@ urlpatterns = [
 path('', views.home, name='itreporting-home'),
 path('about', views.about, name='itreporting-about'), 
 path('contact', views.contact, name='itreporting-contact'),
+path('success', views.success, name='success'),
 #Product
 path('product', ProductListView.as_view(), name='itreporting-product'),
 path('product/<int:pk>', ProductDetailView.as_view(), name='product-detail'),
