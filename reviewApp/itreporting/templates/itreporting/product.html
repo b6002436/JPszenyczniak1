@@ -8,7 +8,7 @@
 <article class="media content-section">
 
   <div class="media-body">
-	<p><img class="rounded-circle account-img" src={{product.image.url}}"></p>
+	<p><img class="rounded-circle account-img" src={{product.product.image.url}}"></p>
 
     <div class="article-metadata">
 
@@ -18,6 +18,8 @@
  	<p> Cost(£): {{product.averagecost}}</p></br>
 	<p> Brand: {{product.brand}}</p></br>
     	<p> Description: {{ product.description}}</p></br>
+	<a href="{% url 'review-create' %}"> Add new review </a> </br>
+	<a href="{% url 'itreporting-review'%}">View Reviews</a>
 
     </div>
 	
