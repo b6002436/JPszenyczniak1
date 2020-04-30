@@ -10,15 +10,16 @@
 
     <div class="article-metadata">
 
-      <h4 class="mr-2"> Posted by <a class="mr-2" href="{% url 'user-reviews' review.author.username %}"> {{ review.author }}</a> on {{review.date}} </h4>
+      <h4 class="mr-2"> Review by: <a class="mr-2" href="{% url 'user-reviews' review.author.username %}"> {{ review.author }}</a> </h4>
 
-      <small class="text-muted">{{ review.date}}</small>
+      <small class="text-muted"> Date Posted: {{ review.date}}</small>
 
     </div>
 
-    <h2><a class="article-title" href="{% url 'review-detail' review.id %}">{{ review.productrating }} </a></h2>
+    <h2>Product: <a class="article-title" href="{% url 'review-detail' review.id %}">{{ review.productname }} </a></h2>
 
-    <p class="article-content">{{ review.reviewtext }}</p>
+<p> Product Rating: {{review.productrating}}</p></br>
+<p class="article-content"> Review Text:{{ review.reviewtext }}</p>
 
   </div>
 

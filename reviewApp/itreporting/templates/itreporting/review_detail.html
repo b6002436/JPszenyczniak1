@@ -9,15 +9,16 @@
 
     <div class="article-metadata">
 
-      <p class="mr-2"> Posted by <a class="mr-2" href="{% url 'user-reviews' object.author.username %}"> {{ object.author }}</a> on {{ object.date }} </p>
+      <p class="mr-2"> Reviewed by: <a class="mr-2" href="{% url 'user-reviews' object.author.username %}"> {{ object.author }}</a> </p>
 
       <small class="text-muted">{{ object.date}}</small>
 
     </div>
 
-    <h2 class="article-title">{{object.productrating}}</h2>
+    <h2 class="article-title"> Product Name: {{object.productname}}</h2>
 
-    <p class="article-content">{{ object.reviewtext }}</p>
+	<p class="article-content"> Product Rating: {{ object.productrating }}</p>    
+	<p class="article-content"> Review Text: {{ object.reviewtext }}</p>
 
 {% if object.author == user %}
 	<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' object.id %}"> Update </a>

@@ -102,14 +102,14 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Review
-	fields = ['productrating', 'date', 'reviewtext']
+	fields = ['productname','productrating', 'date', 'reviewtext']
 	def form_valid(self, form):
 		form.instance.author = self.request.user
 		return super().form_valid(form)
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Review
-	fields = ['productrating', 'date', 'reviewtext']
+	fields = ['productname','productrating', 'date', 'reviewtext']
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user

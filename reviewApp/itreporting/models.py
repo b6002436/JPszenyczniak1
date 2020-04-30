@@ -6,11 +6,12 @@ from django.urls import reverse
 # Create your models here.
 
 class Review(models.Model):
+	productname=models.CharField(max_length=255)
 	productrating=models.CharField(max_length=5)
 	reviewtext=models.TextField()
 	date=models.DateTimeField(default=timezone.now)
 	author=models.ForeignKey(User,on_delete=models.CASCADE)
-
+	
 	def __str__(self):
 		return self.productrating
 
