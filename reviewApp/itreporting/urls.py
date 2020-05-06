@@ -6,6 +6,7 @@ urlpatterns = [
 #HomePages
 path('', views.home, name='itreporting-home'),
 path('about', views.about, name='itreporting-about'), 
+#ContactPage
 path('contact', views.contact, name='itreporting-contact'),
 path('success', views.success, name='success'),
 #Product
